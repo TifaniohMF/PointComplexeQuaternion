@@ -61,6 +61,7 @@ g++ -o test test.cpp Complexe/complexe.cpp Point/point.cpp Quaternion/quaternion
 - Pour les complexes : `g++ -o complexe Complexe/complexe.cpp && ./complexe`
 - Pour les points : `g++ -o point Point/point.cpp && ./point`
 - Pour les quaternions : `g++ -o quaternion Quaternion/quaternions_algebra.cpp && ./quaternion`
+
 ## 📐 Notions Mathématiques utilisées
 
 - **Complexe** : $z = x + iy$ où $i^{2} = -1$.
