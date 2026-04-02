@@ -77,4 +77,4 @@ git checkout -b feature/AmeliorationMaths
 ```
 3. Proposez une Pull Request.
 
-Auteur : [TifaniohMF](https ://github.com/TifaniohMF)
+Auteur : [TifaniohMF](https://github.com/TifaniohMF)
