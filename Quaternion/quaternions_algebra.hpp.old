@@ -1,0 +1,283 @@
+#ifndef QUATERNION_H
+#define QUATERNION_H
+#include<iostream>
+#include<cmath>
+using namespace std;
+class quaternion
+{
+    friend ostream & operator << (ostream & out ,const quaternion &A);
+    friend istream & operator >> (istream & in ,quaternion &A);
+    public:
+        quaternion(double re = 0, double i = 0, double j = 0, double k = 0);
+        void setR(double re);
+        void setI(double i);
+        void setJ(double j);
+        void setK(double k);
+        double getR() const;
+        double getI() const;
+        double getJ() const;
+        double getK() const;
+        quaternion operator+(const quaternion &A) const;
+        quaternion operator-(const quaternion &A) const;
+        quaternion operator*(const quaternion &A) const;
+        double module() const;
+    private :
+        double re, i, j, k;
+};
+void quaternion::setR(double re)
+{
+    this->re=re;
+}
+void quaternion::setI(double i)
+{
+    this->i=i;
+}
+void quaternion::setJ(double j)
+{
+    this->j=j;
+}
+void quaternion::setK(double k)
+{
+    this->k=k;
+}
+double quaternion::getR()
+{
+    return re;
+}
+double quaternion::getI()
+{
+    return i;
+}
+double quaternion::getJ()
+{
+    return j;
+}
+double quaternion::getK()
+{
+    return k;
+}
+quaternion quaternion::addition(quaternion &A)
+{
+    quaternion D;
+    D.re = re + A.re;
+    D.i = i + A.i;
+    D.j = j + A.j;
+    D.k = k + A.k;
+    return D;
+}
+quaternion quaternion::soustraction(quaternion &A)
+{
+    quaternion D;
+    D.re = re - A.re;
+    D.i = i - A.i;
+    D.j = j - A.j;
+    D.k = k - A.k;
+    return D;
+}
+quaternion quaternion::multiplication(quaternion &A)
+{
+    quaternion D;
+    D.re = re*A.re - i*A.i - j*A.j - k*A.k;
+    D.i = re*A.i + A.re*i + j*A.k - k*A.j;
+    D.j = re*A.j - i*A.k + A.re*j + k*A.i;
+    D.k = re*A.k + i*A.j -j*A.i + A.j*k;
+    return D;
+}
+quaternion quaternion::division(quaternion &A)
+{
+    quaternion D;
+    
+    return D;
+}
+double quaternion::module()
+{
+    return sqrt(pow(re,2) + pow(i,2) + pow(j,2) + pow(k,2));
+}
+istream & operator >> (istream & in ,quaternion &A)
+{
+    cout << "Tapez la partie réel : " ; in >> A.re;
+    cout << "Tapez la partie i : ";in >> A.i;
+    cout << "Tapez la partie j : ";in >> A.j;
+    cout << "Tapez la partie k : ";in >> A.k;
+    return in;
+}
+ostream & operator << (ostream & out ,const quaternion &A)
+{
+    if (A.i == 0 && A.j == 0 && A.k == 0)
+    {
+        out << "QUATERNION : " << A.re << endl; 
+    }
+    else if (A.re == 0 && A.j==0 && A.k == 0)
+    {
+        out << "QUATERNION : " << A.i << "i" << endl;
+    }
+    else if (A.re == 0 && A.i == 0 && A.k == 0)
+    {
+        out << "QUATERNION : " << A.j << "j" << endl;
+    }
+    else if (A.re == 0 && A.i == 0 && A.j == 0)
+    {
+        out << "QUATERNION : " << A.k << "k" << endl;
+    }
+    else if (A.j == 0 && A.k == 0)
+    {
+        if (A.i > 0)
+        {
+            out << "QUATERNION : " << A.re << " + " << A.i << "i" << endl;
+        }
+        else if (A.i < 0)
+        {
+            out << "QUATERNION : " << A.re << " " << A.i << "i" << endl;
+        }
+    }
+    else if (A.i == 0 && A.k == 0 && A.j > 0)
+    {
+        out << "QUATERNION : " << A.re << " + " << A.j << "j" << endl;
+    }
+    else if (A.i == 0 && A.k == 0 && A.j < 0)
+    {
+        out << "QUATERNION : " << A.re << " " << A.j << "j" << endl;
+    }
+    else if (A.i == 0 && A.j== 0 && A.k > 0)
+    {
+        out << "QUATERNION : " << A.re << " + " << A.k << "k" << endl;
+    }
+    else if (A.i == 0 && A.j == 0 && A.k < 0)
+    {
+        out << "QUATERNION : " << A.re << " " << A.k << "k" << endl;
+    }
+    else if (A.re == 0 && A.i == 0)
+    {
+        if (A.j>A.k && A.k>0)
+        {
+            out << "QUATERNION : " << A.j <<"j" <<" + " << A.k << "k" << endl;
+        }
+        else if(A.j > A.k && A.k < 0)
+        {
+            out << "QUATERNION : " << A.j <<"j" << " " << A.k << "k" << endl;
+        }
+    }
+       else if (A.re == 0 && A.j == 0)
+    {
+        if (A.k > 0)
+        {
+            out << "QUATERNION : " << A.i <<"i" <<" + " << A.k << "k" << endl;
+        }
+        else if(A.k < 0)
+        {
+            out << "QUATERNION : " << A.i <<"i" << " " << A.k << "k" << endl;
+        }
+    }
+       else if (A.re == 0 && A.k == 0)
+    {
+        if (A.i>0)
+        {
+            out << "QUATERNION : " << A.j <<"j" <<" + " << A.i << "i" << endl;
+        }
+        else if(A.i < 0)
+        {
+            out << "QUATERNION : " << A.j <<"j" << " " << A.i << "i" << endl;
+        }
+    }
+    else if (A.re == 0)
+    {
+        if (A.j > 0 && A.k > 0)
+        {
+            out <<"QUATERNION : "<<  A.i << "i" << " + " << A.j <<"j" <<  " + " << A.k << "k" << endl;
+        }
+        else if (A.j > 0 && A.k < 0)
+        {
+            out <<"QUATERNION : " << A.i << "i" << " + " << A.j << "j" << " " << A.k << "k" << endl;
+        }
+        else if (A.j < 0 &&  A.k < 0)
+        {
+            out <<"QUATERNION : "<<  A.i << "i" << " " << A.j << "j"  << " " << A.k << "k" << endl;
+        }
+    }
+    else if (A.i == 0)
+    {
+        if (A.j >0 && A.k > 0)
+        {
+            out <<"QUATERNION : " << A.re << "i" << " + " << A.j <<"j" <<  " + " << A.k << "k" << endl;
+        }
+        else if (A.j > 0 && A.k < 0)
+        {
+            out <<"QUATERNION : " << A.re << " + " << A.j << "j" << " " << A.k << "k" << endl;
+        }
+        else if (A.j < 0 &&  A.k < 0)
+        {
+            out <<"QUATERNION : " <<  A.re << " " << A.j << "j"  << " " << A.k << "k" << endl;
+        }
+    }
+    else if (A.j == 0)
+    {
+        if (A.i >0 && A.k > 0)
+        {
+            out <<"QUATERNION : " << A.re << "i" << " + " << A.i <<"i" <<  " + " << A.k << "k" << endl;
+        }
+        else if (A.i > 0 && A.k < 0)
+        {
+            out <<"QUATERNION : " << A.re  << " + " << A.i << "i" << " " << A.k << "k" << endl;
+        }
+        else if (A.i < 0 &&  A.k < 0)
+        {
+            out << "QUATERNION : " << A.re << " " << A.i << "i"  << " " << A.k << "k" << endl;
+        }
+    }
+    else if (A.k == 0)
+    {
+        if (A.j >0 && A.i > 0)
+        {
+            out << "QUATERNION : " <<A.re << " + " << A.j <<"j" <<  " + " << A.i << "i" << endl;
+        }
+        else if (A.j > 0 && A.k < 0)
+        {
+            out << "QUATERNION : " << A.re << " + " << A.j << "j" << " " << A.i << "i" << endl;
+        }
+        else if (A.j < 0 &&  A.k < 0)
+        {
+            out << "QUATERNION : " <<A.re  << " " << A.j << "j"  << " " << A.i << "i" << endl;
+        }
+    }
+    else if (A.re == 0 && A.i == 0 && A.j == 0 && A.k == 0)
+    {
+        out << "QUATERNION : "<<  0 << endl;
+    }
+    else
+    {
+        if (A.i > 0 && A.j>0 && A.k > 0)
+        {
+            out <<"QUATERNION : " << A.re << " + " << A.i <<"i" <<  " + " << A.j <<"j" << " + " << A.k << "k" << endl;
+        }
+        else if (A.i > 0 && A.j> 0 && A.k < 0)
+        {
+            out <<"QUATERNION : " << A.re << " + " << A.i <<"i" <<  " + " << A.j <<"j" << " " << A.k << "k" << endl;
+        }
+        else if (A.i > 0 && A.j< 0 && A.k < 0)
+        {
+            out <<"QUATERNION : " << A.re << " + " << A.i <<"i" <<  " " << A.j <<"j" << " " << A.k << "k" << endl;
+        }
+        else if (A.i > 0 && A.j< 0 && A.k > 0)
+        {
+            out << "QUATERNION : " << A.re << " + " << A.i <<"i" <<  " " << A.j <<"j" << " + " << A.k << "k" << endl;
+        }
+        else if (A.i <  0 && A.j > 0 && A.k > 0)
+        {
+            out << "QUATERNION : " <<  A.re << " " << A.i <<"i" <<  " + " << A.j <<"j" << " + " << A.k << "k" << endl;
+        }
+        else if (A.i < 0 && A.j < 0 && A.k > 0)
+        {
+            out << "QUATERNION : " <<  A.re << " " << A.i <<"i" <<  " " << A.j <<"j" << " + " << A.k << "k" << endl;
+        }
+        else if (A.i < 0 && A.j > 0 && A.k < 0)
+        {
+            out << "QUATERNION : " <<  A.re << " " << A.i <<"i" <<  " + " << A.j <<"j" << " " << A.k << "k" << endl;
+        }
+        else if (A.i < 0 && A.j < 0 && A.k < 0)
+        {
+            out << "QUATERNION : " << A.re << " " << A.i <<"i" <<  " " << A.j <<"j" << " " << A.k << "k" << endl;
+        }
+    }
+    return out ;
+}
+#endif

@@ -1,6 +1,6 @@
 # 🎯 Points, Complexes et Quaternions
 
-Ce projet est une bibliothèque (ou un ensemble de scripts) développée en Python permettant de manipuler des entités mathématiques dans différents espaces : le plan 2D (points et nombres complexes) et l'espace 3D/4D (quaternions).
+Ce projet est une bibliothèque développée en C++ permettant de manipuler des entités mathématiques dans différents espaces : le plan 2D (points et nombres complexes) et l'espace 3D/4D (quaternions).
 
 ## 🚀 À propos du projet
 L'objectif de ce dépôt est de fournir une implémentation propre et intuitive pour :
@@ -51,11 +51,16 @@ le projet utilise C++.
 git clone https://github.com/TifaniohMF/PointComplexeQuaternion.git
 ```
 
-2. Exécuter le script 
-'''bash
-g++ complexe.cpp  -o complexe
-./complexe
-'''
+2. Compiler et exécuter les tests :
+```bash
+g++ -o test test.cpp Complexe/complexe.cpp Point/point.cpp Quaternion/quaternions_algebra.cpp
+./test
+```
+
+3. Exemples d'utilisation individuelle :
+- Pour les complexes : `g++ -o complexe Complexe/complexe.cpp && ./complexe`
+- Pour les points : `g++ -o point Point/point.cpp && ./point`
+- Pour les quaternions : `g++ -o quaternion Quaternion/quaternions_algebra.cpp && ./quaternion`
 ## 📐 Notions Mathématiques utilisées
 
 - **Complexe** : $z = x + iy$ où $i^{2} = -1$.
