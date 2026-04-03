@@ -26,18 +26,18 @@ L'objectif de ce dépôt est de fournir une implémentation propre et intuitive 
 ```text
 PointComplexeQuternion/
 ├── Complexe
-│   ├── complexe
-│   ├── complexe.cpp 
-│   └── complexe.hpp		
+│   ├── complexe.cpp
+│   └── complexe.hpp
 ├── Point
-│   ├── point
-│   ├── point.cpp		
+│   ├── point.cpp
 │   └── point.hpp
 ├── Quaternion
-│   ├── quaternions
 │   ├── quaternions_algebra.cpp
-│   └── quaternions_algebra.hpp
-└── README.md
+│   ├── quaternions_algebra.hpp
+│   └── quaternions_algebra.hpp.old
+├── README.md
+├── test
+└── test.cpp
 ```
 
 ---
